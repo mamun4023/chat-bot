@@ -1,15 +1,17 @@
-import { useState } from 'react'
+import { BrowserRouter } from "react-router-dom";
+import Routes from "./routes";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import {reduxStore} from './redux/store'
 
-function App() {
-
-
-  return (
-    <>
-      <div>
-          Hello world
-        </div>
-    </>
-  )
+export default function App() {
+    return (
+        <Provider store={reduxStore}> 
+        <BrowserRouter>
+            <ToastContainer />
+            <Routes />
+        </BrowserRouter>
+        </Provider>
+    );
 }
-
-export default App

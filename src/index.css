@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  
+  @font-face {
+        font-family: "lexend";
+        src: url("./assets//fonts//Lexend.ttf") format("truetype");
+    }
+
+    @font-face {
+        font-family: "manrope";
+        src: url("./assets//fonts/Manrope.ttf") format("truetype");
+    }
+
+    body{
+      @apply font-manpope font-[400]
+    }
+
+   h1,h2,h3{
+      @apply font-lexend font-[700]
+   }
+   h4,h5,h6{
+    @apply font-manpope
+   }
+
+   p{
+     @apply font-manpope font-[400]
+   }
+}
