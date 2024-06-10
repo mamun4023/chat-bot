@@ -8,7 +8,7 @@ import Logo from "./Logo";
 
 export default function SignUp() {
     const navigate = useNavigate();
-    const [signUp] = useSignUpMutation();
+    const [signUp, {isLoading}] = useSignUpMutation();
     const [name, setName] = useState("");
 
     const [email, setEmail] = useState("");
@@ -73,9 +73,12 @@ export default function SignUp() {
                             />
                         </div>
 
-                        <button className=" w-full btn btn-primary text-white">
-                            {" "}
-                            {CONSTANT.SIGNUP}{" "}
+                        <button className=" btn btn-primary text-white" disabled={isLoading}>
+                            {isLoading ? (
+                                <span className="loading loading-spinner loading-lg bg-success "></span>
+                            ) : (
+                                CONSTANT.SIGNUP
+                            )}
                         </button>
                     </div>
                     <div className="my-2 text-[16px] mt-4">

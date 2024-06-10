@@ -4,13 +4,14 @@ import { useChatMutation, useAddConversationMutation, useMeQuery } from "../redu
 import { RiRobot3Fill } from "react-icons/ri";
 
 export default function ChatBox() {
-    const [chatText, setChatText] = useState("Hi");
+    const [chatText, setChatText] = useState("");
     const [isFocused, setISFocused] = useState(false);
     const { data: user } = useMeQuery();
     const [chat, { isLoading : responseLoder }] = useChatMutation();
     const [addConversation] = useAddConversationMutation();
     const [conversationId, setConversationId] = useState(0);
     const [conversation, setConversation] = useState([]);
+    
     const startConversation = async () => {
         try {
             const resp = await addConversation({ user_id: user?.id }).unwrap();
@@ -28,7 +29,6 @@ export default function ChatBox() {
 
         try {
             const resp = await chat(chatData).unwrap();
-            console.log(resp);
             setConversation(resp);
         } catch (err) {
             console.log(err);
@@ -36,14 +36,23 @@ export default function ChatBox() {
         setChatText("");
     };
 
-    useEffect(() => {
-        setTimeout(() => {
-            startConversation();
-        }, 2000);
-
-        setTimeout(() => {
+    const handleKeyDown = (event)=>{
+        if (event.key === 'Enter') {
             sendQuery(conversationId);
-        }, 5000);
+            setISFocused(false)
+          }
+          
+    }
+
+    useEffect(() => {
+        
+        startConversation();
+       
+
+       if(conversationId){
+            sendQuery(conversationId);
+       }
+        
     }, []);
 
     return (
@@ -84,6 +93,7 @@ export default function ChatBox() {
                 <input
                     className="input input-bordered w-full"
                     value={chatText}
+                    // onKeyDown={handleKeyDown}
                     onFocus={() => setISFocused(true)}
                     onBlur={() => setISFocused(false)}
                     onChange={(e) => setChatText(e.target.value)}

@@ -59,8 +59,8 @@ export const applicationAPI = createApi({
         removeConversation: builder.mutation({
             query: (id) => ({
                 url: `${ROUTES.CONVERSATION}/${id}`,
-                method: "POST",
-                body: data,
+                method: "DELETE",
+                
             }),
         }),
         chat: builder.mutation({

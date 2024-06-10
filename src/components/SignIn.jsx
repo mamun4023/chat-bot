@@ -66,7 +66,7 @@ export default function SignIn() {
 
                         <button className=" btn btn-primary text-white" disabled={isLoading}>
                             {isLoading ? (
-                                <span className="loading loading-dots loading-lg bg-success "></span>
+                                <span className="loading loading-spinner loading-lg bg-success "></span>
                             ) : (
                                 CONSTANT.SIGNIN
                             )}
