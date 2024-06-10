@@ -1,11 +1,19 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ROUTES } from "../constants/route";
+import Cookies from "js-cookie";
+
 
 export const applicationAPI = createApi({
     reducerPath: "API",
     baseQuery: fetchBaseQuery({
         baseUrl: import.meta.env.VITE_API_URL,
-        // credentials: "include",
+        prepareHeaders : (headers)=>{
+            const token = Cookies.get('authToken')
+            if (token) {
+              headers.set('Authorization', `Bearer ${token}`);
+            }
+            return headers
+        }
     }),
     endpoints: (builder) => ({
         signUp: builder.mutation({
@@ -29,15 +37,51 @@ export const applicationAPI = createApi({
                 method: "GET",
             }),
         }),
-        addHistory: builder.mutation({
+        addConversation: builder.mutation({
             query: (data) => ({
-                url: ROUTES.ADD_HISTORY,
+                url: ROUTES.CONVERSATION,
                 method: "POST",
                 body: data,
             }),
         }),
+        getConversations: builder.query({
+            query: () => ({
+                url: ROUTES.CONVERSATION,
+                method: "GET",
+            }),
+        }),
+        getConversation: builder.query({
+            query: (id) => ({
+                url:  `${ROUTES.CONVERSATION}/${id}` ,
+                method: "GET"
+            }),
+        }),
+        removeConversation: builder.mutation({
+            query: (id) => ({
+                url: `${ROUTES.CONVERSATION}/${id}`,
+                method: "POST",
+                body: data,
+            }),
+        }),
+        chat: builder.mutation({
+            query: (data) => ({
+                url: ROUTES.CHAT,
+                method: "POST",
+                body: data,
+            }),
+        }),
+        
     }),
 });
 
-export const { useSignUpMutation, useSignInMutation, useMeQuery, useAddHistoryMutation } =
+export const { 
+    useSignUpMutation, 
+    useSignInMutation, 
+    useMeQuery, 
+    useAddConversationMutation,
+    useGetConversationsQuery,
+    useGetConversationQuery,
+    useRemoveConversationMutation,
+    useChatMutation, 
+} =
     applicationAPI;

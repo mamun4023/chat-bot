@@ -6,5 +6,6 @@ export const ROUTES = {
     HOME : "/home",
     PROFILE : "/profile",
     ME : "/auth/me",
-    ADD_HISTORY : "/add-history"
+    CONVERSATION : "/conversation",
+    CHAT : "/chat"
 }

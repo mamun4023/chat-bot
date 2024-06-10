@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { ROUTES } from "../constants/route";
 import { CONSTANT } from "../constants";
 import { useSignUpMutation } from "../redux/API";
+import Logo from "./Logo";
 
 export default function SignUp() {
     const navigate = useNavigate();
@@ -37,23 +38,15 @@ export default function SignUp() {
                 <form onSubmit={signUpHandler}>
                     <div className="flex flex-col gap-4">
                         <div className=" mb-10">
-                            <div className=" flex justify-center">
-                                <span className="bg-success text-white p-4 uppercase rounded-lg ">
-                                    {" "}
-                                    {CONSTANT.CHAT_BOT}{" "}
-                                </span>
-                            </div>
-                            <h1 className=" my-2 text-center text-[34px] text-neutral ">
-                                {" "}
-                                {CONSTANT.SIGNUP}{" "}
-                            </h1>
+                           <Logo />
+                           <h1 className=" my-2 text-center text-[34px] text-neutral "> {CONSTANT.SIGNIN} </h1>
                         </div>
                         <div>
                             <input
                                 type="text"
                                 placeholder="Name"
                                 required
-                                className="input input-bordered w-full"
+                                className="input input-bordered input-primary w-full"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
@@ -64,7 +57,7 @@ export default function SignUp() {
                                 type="email"
                                 placeholder="Email"
                                 required
-                                className="input input-bordered w-full"
+                                className="input input-bordered input-primary w-full"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -74,7 +67,7 @@ export default function SignUp() {
                                 type="password"
                                 placeholder="Password"
                                 required
-                                className="input input-bordered w-full"
+                                className="input input-bordered input-primary w-full"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />

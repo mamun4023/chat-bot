@@ -2,6 +2,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { ROUTES } from "../constants/route";
 import { CONSTANT } from "../constants";
 import Cookies from "js-cookie";
+import Logo from "./Logo";
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -15,12 +16,10 @@ export default function Navbar() {
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
-                <Link to={ROUTES.HOME} className="btn btn-ghost text-xl">
-                    {CONSTANT.CHAT_BOT}
-                </Link>
+                <Logo />
             </div>
             <div className="flex-none gap-2">
-               <button onClick={LogoutHandler} className=" btn" > Logout </button>
+               <button className = "btn text-white bg-success hover:text-black" onClick={LogoutHandler}  > Logout </button>
             </div>
         </div>
     );

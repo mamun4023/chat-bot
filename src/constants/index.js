@@ -8,5 +8,5 @@ export const CONSTANT = {
     PROFILE : "Profile",
     CHAT_BOT : "Chatbot",
     SEARCH : "Search",
-    SEARCH_HISTORY : "Search History"
+    CONVERSATIONS : "Conversations"
 }

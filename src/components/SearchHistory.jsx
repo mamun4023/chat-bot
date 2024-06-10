@@ -6,8 +6,11 @@ export default function SearchHistory() {
     const { data, isLoading } = useMeQuery();
 
     return (
-        <div className="mt-4">
-            <h1 className=" text-xl font-bold"> {CONSTANT.SEARCH_HISTORY} </h1>
+        <div className="bg-primary text-white p-2 rounded-lg">
+            <div className="flex items-center justify-between">
+                <h4 className=""> {CONSTANT.CONVERSATIONS} </h4>
+                <button className=" text-xl">+</button>
+            </div>
             <ul>
                 {data?.data?.searchHistory?.map((item, index) => (
                     <li

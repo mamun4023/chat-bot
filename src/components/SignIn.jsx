@@ -4,13 +4,15 @@ import { toast } from "react-toastify";
 import { ROUTES } from "../constants/route";
 import { CONSTANT } from "../constants";
 import { useSignInMutation } from "../redux/API";
+import Logo from "./Logo";
 import Cookies from "js-cookie";
+import _ from 'lodash'
 
 export default function SignIn() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [signIn] = useSignInMutation();
+    const [signIn, { isLoading }] = useSignInMutation();
 
     const signInHandler = async (e) => {
         e.preventDefault();
@@ -21,7 +23,8 @@ export default function SignIn() {
 
         try {
             const resp = await signIn(data).unwrap();
-            Cookies.set("authToken", resp?.data?.authToken);
+            const token = resp?.authToken
+            Cookies.set("authToken", token);
             navigate(ROUTES.HOME);
         } catch (err) {
             toast.error(err?.data?.message);
@@ -34,12 +37,7 @@ export default function SignIn() {
                 <form onSubmit={signInHandler}>
                     <div className="flex flex-col gap-4">
                         <div className=" mb-10">
-                            <div className=" flex justify-center">
-                                <span className="bg-success text-white p-4 uppercase rounded-lg ">
-                                    {" "}
-                                    {CONSTANT.CHAT_BOT}{" "}
-                                </span>
-                            </div>
+                            <Logo />
                             <h1 className=" my-2 text-center text-[34px] text-neutral ">
                                 {" "}
                                 {CONSTANT.SIGNIN}{" "}
@@ -50,7 +48,7 @@ export default function SignIn() {
                                 type="email"
                                 placeholder="Email"
                                 required
-                                className="input input-bordered w-full"
+                                className="input input-bordered input-primary w-full"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -60,13 +58,19 @@ export default function SignIn() {
                                 type="password"
                                 placeholder="Password"
                                 required
-                                className="input input-bordered w-full"
+                                className="input input-bordered input-primary w-full"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
 
-                        <button className=" btn btn-primary text-white"> {CONSTANT.SIGNIN} </button>
+                        <button className=" btn btn-primary text-white" disabled={isLoading}>
+                            {isLoading ? (
+                                <span className="loading loading-dots loading-lg bg-success "></span>
+                            ) : (
+                                CONSTANT.SIGNIN
+                            )}
+                        </button>
                     </div>
                     <div className="my-2 text-[16px]">
                         <p className="text-primary text-[14px] mt-4 ">
