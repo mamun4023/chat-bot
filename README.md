@@ -7,6 +7,7 @@ A modern chatbot assistant that will reply your queries. That helps us to make p
 ## Features
 
 - Authentication
+- Conversation with AI robot
 - Removing chat history
 
 
