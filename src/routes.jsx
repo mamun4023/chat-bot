@@ -6,13 +6,12 @@ import { ROUTES } from "./constants/route";
 const SignUp = lazy(() => import("./pages/SignUp"));
 const SignIn = lazy(() => import("./pages/SignIn"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const Loader = lazy(() => import("./components/Loader"));
 const Home = lazy(() => import("./pages/Home"));
 const Profile = lazy(() => import("./pages/Profile"));
 
 export default function Routing() {
     return (
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<h1 className="text-2xl">Loading...</h1>}>
             <Routes>
                 <Route path="/" element={<Navigate to={ROUTES.SIGNIN} />} />
                 <Route path={ROUTES.SIGNIN} element={<SignIn />} />
