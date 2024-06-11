@@ -26,6 +26,12 @@ Install All dependecy
   npm run dev
 ```
 
+## Run development server in Docker container
+
+```bash
+   docker build -t app .
+   docker run -it -p 8000:8000 -v $(pwd):/app  --env-file ./.env app 
+```
 
     
 ## Note
