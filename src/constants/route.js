@@ -1,5 +1,6 @@
 
 export const ROUTES = {
+    ROOT : '/chat-bot',
     SIGNIN : "/auth/login",
     SIGNUP : "/auth/signup",
     LOGOUT : "/logout",

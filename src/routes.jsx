@@ -12,8 +12,8 @@ const Profile = lazy(() => import("./pages/Profile"));
 export default function Routing() {
     return (
         <Suspense fallback={<h1 className="text-2xl">Loading...</h1>}>
-            <Routes>
-                <Route path="/" element={<Navigate to={ROUTES.SIGNIN} />} />
+            <Routes  >
+                <Route path= {ROUTES.ROOT} element={<Navigate to={ROUTES.SIGNIN} />} />
                 <Route path={ROUTES.SIGNIN} element={<SignIn />} />
                 <Route path={ROUTES.SIGNUP} element={<SignUp />} />
                 <Route element={<PrivateRoutes />}>
@@ -28,5 +28,5 @@ export default function Routing() {
 
 const PrivateRoutes = () => {
     const token = Cookies.get("authToken");
-    return token ? <Outlet /> : <Navigate to="sign-in" />;
+    return token ? <Outlet /> : <Navigate to= {ROUTES.SIGNIN} />;
 };
