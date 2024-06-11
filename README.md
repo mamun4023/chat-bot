@@ -1,8 +1,34 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# CHATBOT
 
-Currently, two official plugins are available:
+A modern chatbot assistant that will reply your queries. That helps us to make productive.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Features
+
+- Authentication
+- Removing chat history
+
+
+## Installation
+
+Install All dependecy
+
+```bash
+  npm install
+```
+
+
+    
+## Run development server
+
+```bash
+  npm run dev
+```
+
+
+    
+## Note
+
+There was a problem with conversation API response is not showing the content. its only showing the level id . if we want to query all the content by the level id then need to pass inefficient query to the server. that is why i showing the history with the conversation id only
+

@@ -1,12 +1,22 @@
+import { useState } from "react";
 import ChatBox from "../components/ChatBox";
 import Navbar from "../components/Navbar";
 import SearchHistory from "../components/SearchHistory";
-// import BookSearch from "../components/BookSearch";
+import { useMeQuery } from "../redux/API";
+import { RiMenu2Fill } from "react-icons/ri";
 
 export default function Home() {
+    const { data } = useMeQuery();
+    const [open, setOpen] = useState(false)
     return (
         <section className="relative h-screen">
             <Navbar />
+            <div className="absolute   left-2 flex z-10 w-full md:hidden"> 
+                {open && <SearchHistory />} 
+                <button onClick={()=> setOpen(prev=> !prev)} className=" btn ">
+                    <RiMenu2Fill />
+                </button>
+            </div>
             {/* header */}
             <div className=" grid grid-cols-4 m-2  invisible md:visible">
                 <div className="col-span-1 ">
@@ -19,7 +29,7 @@ export default function Home() {
                                 <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                             </div>
                         </div>
-                        <span className=" pl-2"> Chatbot </span>
+                        <span className=" pl-2"> {data?.name} </span>
                     </div>
                 </div>
             </div>
