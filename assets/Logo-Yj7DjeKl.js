@@ -1,0 +1,1 @@
+import{j as s}from"./index-DWF58qIT.js";import{C as e}from"./index-D-rxjfuw.js";function i(){return s.jsx("div",{children:s.jsx("div",{className:" flex justify-center",children:s.jsx("span",{className:"bg-success text-white p-4 uppercase rounded-lg ",children:e.CHAT_BOT})})})}export{i as L};
