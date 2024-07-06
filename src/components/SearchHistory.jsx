@@ -21,7 +21,7 @@ export default function Conversations() {
                         key={index}
                         className=" flex justify-between items-center text-sm p-1 border-[1px] hover:bg-slate-100 my-1 rounded-lg "
                     >
-                        <div> {item?.id} </div>
+                        <div> {item?.label} </div>
                         <button
                             onClick={() => {
                                 openModal();

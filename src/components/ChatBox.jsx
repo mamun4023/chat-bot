@@ -3,11 +3,6 @@ import { IoSendSharp } from "react-icons/io5";
 import { useChatMutation, useAddConversationMutation, useMeQuery } from "../redux/API";
 import { RiRobot3Fill } from "react-icons/ri";
 
-function isEven(num) {
-    if (num % 2 == 0) return true;
-    return false;
-}
-
 export default function ChatBox() {
     const [chatText, setChatText] = useState("Hi");
     const [isFocused, setISFocused] = useState(false);
@@ -32,8 +27,8 @@ export default function ChatBox() {
             conversation_id: id,
             message: chatText,
         };
-        // setConversation((prev)=>[...prev, {id, content : chatText}])
-        console.log("conversation", conversation);
+        setConversation((prev) => [...prev, { content: chatText, user_id: user?.id }]);
+
         setChatText("");
         try {
             const resp = await chat(chatData).unwrap();
@@ -54,37 +49,45 @@ export default function ChatBox() {
         startConversation();
     }, []);
 
+    const allConversation = [...conversation];
+
     return (
         <>
-            <div className=" m-2 overflow-y-auto">
-                {conversation?.map((data, index) => (
-                    <div key={index} className="">
-                        {data?.user_id ? (
-                            <div className="chat chat-start">
-                                <div className="chat-image avatar">
-                                    <div className="w-10 rounded-full">
-                                        <img
-                                            alt="Tailwind CSS chat bubble component"
-                                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="chat-bubble">{data.content} </div>
-                            </div>
-                        ) : (
-                            // robot message
-                            <div className="chat chat-end">
-                                <div className="chat-image avatar">
-                                    <div className="w-10 rounded-full">
-                                        <RiRobot3Fill size={30} />
-                                    </div>
-                                </div>
+            <div className="m-2 overflow-y-auto">
+                {allConversation.length > 0 && (
+                    <>
+                        {allConversation
+                            ?.sort((a, b) => a.id - b.id)
+                            ?.map((data, index) => (
+                                <div key={index} className="">
+                                    {data?.user_id ? (
+                                        <div className="chat chat-start">
+                                            <div className="chat-image avatar">
+                                                <div className="w-10 rounded-full">
+                                                    <img
+                                                        alt="Tailwind CSS chat bubble component"
+                                                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="chat-bubble">{data.content} </div>
+                                        </div>
+                                    ) : (
+                                        // robot message
+                                        <div className="chat chat-end">
+                                            <div className="chat-image avatar">
+                                                <div className="w-10 rounded-full">
+                                                    <RiRobot3Fill size={30} />
+                                                </div>
+                                            </div>
 
-                                <div className="chat-bubble">{data.content}</div>
-                            </div>
-                        )}
-                    </div>
-                ))}
+                                            <div className="chat-bubble">{data.content}</div>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                    </>
+                )}
                 {isFocused && <WritingAnimationOfUser />}
                 {responseLoder && <WritingAnimationRobot />}
             </div>
